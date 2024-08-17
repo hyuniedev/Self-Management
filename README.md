@@ -10,10 +10,10 @@ Tính năng:
     - Chỉnh màu cho từng Task
     
     - Có 4 mục
-        - Việc cần làm
-        - Việc đang làm
-        - Việc chưa hoàn thành
-        - Việc đã hoàn thành.
+        - Việc cần làm (To do)
+        - Việc đang làm (Doing)
+        - Việc chưa hoàn thành/Hủy (Cancel)
+        - Việc đã hoàn thành. (Done)
     - Khi đến giờ thực hiện công việc, sẽ có thông báo. Có thể lựa chọn thực hiện ngay hoặc báo lại sau 1 khoảng thời gian.
 - Quản lý dòng tiền
 - Cài đặt
