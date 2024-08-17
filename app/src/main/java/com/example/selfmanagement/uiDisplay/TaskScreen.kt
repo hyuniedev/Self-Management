@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -109,10 +110,10 @@ fun TaskScreen(navController: NavHostController) {
             // Tim kiem
 
             // Danh sach task
-            Column(
+            LazyColumn (
                 modifier = Modifier.padding(6.dp)
-            ) {
-                lsGroupTask.forEachIndexed { index, s ->
+            ){
+                items(lsGroupTask.size){index->
                     GroupToDo(indexTitle = index, indexDisplay = indexDisplay)
                 }
             }
@@ -142,14 +143,14 @@ fun GroupToDo(indexTitle: Int, indexDisplay: MutableIntState){
             Text(text = lsGroupTask[indexTitle])
         }
         if(isDisplay){
-            Box(modifier = Modifier
+            Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 10.dp)
                 .padding(bottom = 10.dp)
                 .clip(RoundedCornerShape(6.dp))
                 .background(color = MaterialTheme.colorScheme.inverseOnSurface),
             ){
-                Text(text = "Hyu Nie")
+                // TODO("them items cac task va goi CardTask()")
             }
         }
     }

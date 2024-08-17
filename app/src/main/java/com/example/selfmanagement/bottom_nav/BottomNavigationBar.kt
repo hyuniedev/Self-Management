@@ -60,7 +60,9 @@ fun BottomNavigationBar(itemNavSelected: MutableState<String>, navController: Na
                     selected = itemNavSelected.value == itemNav.title,
                     onClick = {
                         itemNavSelected.value = itemNav.title
-                        navController.navigate(itemNav.title)
+                        navController.navigate(itemNav.title){
+                            popUpTo(0)
+                        }
                     },
                     icon = {
                         Icon(
