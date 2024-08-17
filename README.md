@@ -8,5 +8,12 @@ Tính năng:
     - Add các Tag vào từng Task để đánh dấu
     - Đặt âm thanh theo từng Tag
     - Chỉnh màu cho từng Task
+    
+    - Có 4 mục
+        - Việc cần làm
+        - Việc đang làm
+        - Việc chưa hoàn thành
+        - Việc đã hoàn thành.
+    - Khi đến giờ thực hiện công việc, sẽ có thông báo. Có thể lựa chọn thực hiện ngay hoặc báo lại sau 1 khoảng thời gian.
 - Quản lý dòng tiền
 - Cài đặt
