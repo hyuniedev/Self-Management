@@ -1,4 +1,10 @@
 # Self-Management
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+XX           Đang đươc phát triển            XX
+XX             - by HyuNieDev -              XX
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 Project Self Management - Mobile app
 - Android 7.0+ (API 24+)
 Tính năng:
