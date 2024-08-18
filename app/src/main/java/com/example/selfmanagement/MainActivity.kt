@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
-    var itemNavSelected = rememberSaveable {
+    val itemNavSelected = rememberSaveable {
         mutableStateOf(Screens.Self.nameScreen)
     }
     Scaffold(
@@ -55,7 +55,7 @@ fun MainScreen() {
         ) {
             NavHost(navController = navController, startDestination = Screens.Self.nameScreen){
                 composable(Screens.Self.nameScreen){ SelfScreen(navController = navController)}
-                composable(Screens.Task.nameScreen){ TaskScreen(navController = navController)}
+                composable(Screens.Task.nameScreen){ TaskScreen()}
                 composable(Screens.Tag.nameScreen){ TagScreen(navController = navController)}
                 composable(Screens.Setting.nameScreen){ SettingScreen(navController = navController)}
             }

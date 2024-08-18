@@ -55,7 +55,7 @@ fun BottomNavigationBar(itemNavSelected: MutableState<String>, navController: Na
                 .fillMaxWidth()
                 .background(color = MaterialTheme.colorScheme.inverseOnSurface)
         ) {
-            itemsNav.forEachIndexed { index, itemNav ->
+            itemsNav.forEachIndexed { _, itemNav ->
                 NavigationBarItem(
                     selected = itemNavSelected.value == itemNav.title,
                     onClick = {

@@ -6,35 +6,28 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
-import androidx.compose.material.icons.rounded.Checklist
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
-import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material.icons.rounded.SelectAll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableIntState
@@ -44,32 +37,26 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import androidx.navigation.NavHostController
+import com.example.selfmanagement.data.Task
 
 
 val lsGroupTask = listOf(
     "To do", "Doing", "Cancel", "Done"
 )
 
+@Preview
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TaskScreen(navController: NavHostController) {
-    var isSelect = remember {
-        mutableStateOf(false)
-    }
-    var indexDisplay = remember {
+fun TaskScreen() {
+    val indexDisplay = remember {
         mutableIntStateOf(-1)
     }
-    var txtSearch = remember {
-        mutableStateOf("")
-    }
-    var isAddTask = remember {
+    val isAddTask = remember {
         mutableStateOf(false)
     }
     Scaffold(
@@ -116,7 +103,9 @@ fun TaskScreen(navController: NavHostController) {
                     isAddTask.value = false
                 }
             ) {
-                Column(modifier = Modifier.padding(10.dp).fillMaxSize()) {
+                Column(modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxSize()) {
                     Text(
                         text = "Add Task",
                         fontWeight = FontWeight.SemiBold,
@@ -131,7 +120,7 @@ fun TaskScreen(navController: NavHostController) {
 @Composable
 fun GroupToDo(indexTitle: Int, indexDisplay: MutableIntState) {
     val isDisplay =
-        if (indexDisplay.value == -1) false else lsGroupTask[indexDisplay.value] == lsGroupTask[indexTitle]
+        if (indexDisplay.intValue == -1) false else lsGroupTask[indexDisplay.intValue] == lsGroupTask[indexTitle]
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -142,8 +131,8 @@ fun GroupToDo(indexTitle: Int, indexDisplay: MutableIntState) {
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-                    if (indexDisplay.value != indexTitle) indexDisplay.value =
-                        indexTitle else indexDisplay.value = -1
+                    if (indexDisplay.intValue != indexTitle) indexDisplay.intValue =
+                        indexTitle else indexDisplay.intValue = -1
                 }
                 .height(36.dp)
                 .background(MaterialTheme.colorScheme.secondary),
@@ -151,12 +140,14 @@ fun GroupToDo(indexTitle: Int, indexDisplay: MutableIntState) {
         ) {
             Icon(
                 imageVector = if (isDisplay) Icons.Rounded.KeyboardArrowDown else Icons.Rounded.ChevronRight,
-                contentDescription = "Open ${lsGroupTask[indexTitle]}"
+                contentDescription = "Open ${lsGroupTask[indexTitle]}",
+                tint = MaterialTheme.colorScheme.onSecondary
             )
             Text(
                 text = lsGroupTask[indexTitle],
                 fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSecondary
             )
         }
         if (isDisplay) {
@@ -175,6 +166,34 @@ fun GroupToDo(indexTitle: Int, indexDisplay: MutableIntState) {
 }
 
 @Composable
-fun CardTask() {
-
+fun CardTask(task: Task) {
+    Column {
+        LazyRow {
+            task.lsTag?.forEach {
+                // TODO("Add Composable Tags")
+            }
+        }
+        Text(text = task.name)
+        Text(text = task.description)
+        Row {
+            Text(text = "Start")
+            Text(text = task.timeStart.time.toString())
+        }
+        Row {
+            Text(text = "End")
+            Text(text = task.timeEnd.time.toString())
+        }
+        Row {
+            Text(text = "Reminder")
+            Text(text = task.reminder.time.toString())
+        }
+        Row {
+            Button(onClick = {}) {
+                Text(text = "Edit")
+            }
+            Button(onClick = {}) {
+                Text(text = "Move")
+            }
+        }
+    }
 }
