@@ -1,8 +1,8 @@
 # Self-Management
 
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
-XX           Đang đươc phát triển            XX  
-XX             - by HyuNieDev -              XX  
+<pre>XX           Đang đươc phát triển            XX  </pre>
+<pre>XX             - by HyuNieDev -              XX  </pre>
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
 
 Project Self Management - Mobile app
