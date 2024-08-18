@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.example.selfmanagement.data.Task
+import com.example.selfmanagement.data.tagGroup
 
 
 val lsGroupTask = listOf(
@@ -160,6 +161,13 @@ fun GroupToDo(indexTitle: Int, indexDisplay: MutableIntState) {
                     .background(color = MaterialTheme.colorScheme.inverseOnSurface),
             ) {
                 // TODO("them items cac task va goi CardTask()")
+                val tmpTask: Task = Task(
+                    name = "nau com",
+                    id = 1,
+                    description = "Nau com an toi",
+                    lsTag = tagGroup.toMutableSet()
+                )
+                CardTask(task = tmpTask)
             }
         }
     }
