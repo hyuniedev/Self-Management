@@ -4,5 +4,6 @@ import androidx.compose.ui.graphics.Color
 
 data class Tag(
     val name: String,
-    val color: Color
+    val color: Color = Color.Black,
+    val background: Color
 )

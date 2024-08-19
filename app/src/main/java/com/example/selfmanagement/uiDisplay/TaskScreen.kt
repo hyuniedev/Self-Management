@@ -1,5 +1,6 @@
 package com.example.selfmanagement.uiDisplay
 
+import android.util.Log
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
@@ -50,6 +52,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import com.example.selfmanagement.bottom_sheet.BottomTaskSheet
 import com.example.selfmanagement.data.Task
 import com.example.selfmanagement.data.tagGroup
 import java.text.SimpleDateFormat
@@ -111,21 +114,7 @@ fun TaskScreen() {
             }
         }
         if(isAddTask.value){
-            ModalBottomSheet(
-                onDismissRequest = {
-                    isAddTask.value = false
-                }
-            ) {
-                Column(modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxSize()) {
-                    Text(
-                        text = "Add Task",
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 20.sp
-                    )
-                }
-            }
+            BottomTaskSheet(isAddTask = isAddTask)
         }
     }
 }
@@ -185,18 +174,24 @@ fun GroupToDo(indexTitle: Int, indexDisplay: MutableIntState) {
 
 @Composable
 fun CardTask(task: Task) {
+    val isExtend = remember {
+        mutableStateOf(false)
+    }
     Column(
         modifier = Modifier
             .clip(RoundedCornerShape(6.dp))
             .fillMaxWidth()
+            .clickable { isExtend.value = !isExtend.value }
             .background(color = MaterialTheme.colorScheme.inverseOnSurface)
             .padding(horizontal = 10.dp, vertical = 6.dp)
+            .animateContentSize()
     ) {
         LazyRow {
-            task.lsTag?.forEach {
-                // TODO("Add Composable Tags")
+            items(task.lsTag?.toList().orEmpty()){tag ->
+                TagIcon(tag = tag)
             }
         }
+        Log.d("TagHyuNie",task.lsTag?.size.toString())
         Spacer(modifier = Modifier.height(6.dp))
         Text(
             text = task.name,
@@ -212,21 +207,23 @@ fun CardTask(task: Task) {
             color = Color.Gray
         )
         Spacer(modifier = Modifier.height(14.dp))
-        RowTime(title = "Start:", time = getCurrentDateTime(task.timeStart.time))
-        RowTime(title = "End:", time = getCurrentDateTime(task.timeEnd.time))
-        RowTime(title = "Reminder:", time = getCurrentDateTime(task.reminder.time))
-        Spacer(modifier = Modifier.height(8.dp))
-        Row(
-            modifier = Modifier.align(Alignment.End)
-        ) {
-            OutlinedButton(onClick = {}) {
-                Text(text = "Move")
-            }
-            Spacer(modifier = Modifier.width(20.dp))
-            OutlinedButton(
-                onClick = {}
+        if(isExtend.value){
+            RowTime(title = "Start:", time = getCurrentDateTime(task.timeStart.time))
+            RowTime(title = "End:", time = getCurrentDateTime(task.timeEnd.time))
+            RowTime(title = "Reminder:", time = getCurrentDateTime(task.reminder.time))
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.align(Alignment.End)
             ) {
-                Text(text = "Edit")
+                OutlinedButton(onClick = {}) {
+                    Text(text = "Move")
+                }
+                Spacer(modifier = Modifier.width(20.dp))
+                OutlinedButton(
+                    onClick = {}
+                ) {
+                    Text(text = "Edit")
+                }
             }
         }
     }
